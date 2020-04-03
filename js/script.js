@@ -7,25 +7,34 @@ const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
 const startGame = () => {
     let guessNumber = randomInteger(1, 100); // Генерируем число
     let userNumber; // Введенное число игроком
+    let trying = 10; // Количество попыток
 
     console.log(guessNumber);
 
     const guessing = () => {
         while (true) {
+            trying--;
             userNumber = prompt('Угадай число от 1 до 100');
-            if (userNumber === null) break;
+            if (userNumber === null) {
+                alert('Эх, а ведь могли бы и еще поиграть.. :(');
+                break;
+            }
             if (guessNumber == userNumber) {
-                alert('Вы угадали!');
+                if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) startGame();
                 break;
             }
             if (!isNumber(userNumber)) {
                 alert('Введи число!');
                 continue;
             }
+            if (trying == 0) {
+                if (confirm('Попытки закончились, хотите сыграть еще?')) startGame();
+                break;
+            }
             if (guessNumber < userNumber) {
-                alert('Загаданное число меньше');
+                alert('Загаданное число меньше, осталось попыток ' + trying);
             } else {
-                alert('Загаданное число больше');
+                alert('Загаданное число больше, осталось попыток ' + trying);
             }
         }
     };
