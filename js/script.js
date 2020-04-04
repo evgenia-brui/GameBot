@@ -13,7 +13,6 @@ const startGame = () => {
 
     const guessing = () => {
         while (true) {
-            trying--;
             userNumber = prompt('Угадай число от 1 до 100');
             if (userNumber === null) {
                 alert('Эх, а ведь могли бы и еще поиграть.. :(');
@@ -27,6 +26,7 @@ const startGame = () => {
                 alert('Введи число!');
                 continue;
             }
+            trying--;
             if (trying == 0) {
                 if (confirm('Попытки закончились, хотите сыграть еще?')) startGame();
                 break;
